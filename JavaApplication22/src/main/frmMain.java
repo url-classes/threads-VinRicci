@@ -5,17 +5,54 @@
  */
 package main;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author migu_
  */
 public class frmMain extends javax.swing.JFrame {
-
+    String [] abece = new String []{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+    int contab=0;
+    int contn=0;
+    hilo hilo1 = new hilo();
+    hilonumero hilo2 =  new hilonumero();
+    //Hacer que llegue a 100 el numero y la letra a z con hilos
     /**
      * Creates new form frmMain
      */
     public frmMain() {
         initComponents();
+    }
+    
+    public class hilo extends Thread{
+
+        public void run(){
+            while(contab <26){
+                lblLetra.setText(abece[contab]);
+                contab=contab+1;
+                try{
+                    Thread.sleep(200);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    public class hilonumero extends Thread{
+        public void run(){
+            while(contn<101){
+                lblNumero1.setText(String.valueOf(contn));
+                contn=contn+1;
+                try{
+                    Thread.sleep(200);
+                }catch (InterruptedException ex) {
+                    Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     /**
@@ -96,10 +133,12 @@ public class frmMain extends javax.swing.JFrame {
 
     private void btnIniciarNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarNumeroActionPerformed
         // TODO add your handling code here:
+        hilo2.start();
     }//GEN-LAST:event_btnIniciarNumeroActionPerformed
 
     private void btnIniciarLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarLetraActionPerformed
         // TODO add your handling code here:
+        hilo1.start();
     }//GEN-LAST:event_btnIniciarLetraActionPerformed
 
     /**
